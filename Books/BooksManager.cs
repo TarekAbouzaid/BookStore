@@ -48,4 +48,9 @@ public sealed class BooksManager
             book.PrintInformation();
         }
     }
+
+    public bool CheckAvailability(IBook book)
+    {
+        return Books.Contains(book);
+    }
 }

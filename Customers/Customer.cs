@@ -1,14 +1,24 @@
-﻿namespace BookStore.Customers;
+﻿using BookStore.Books;
 
-public abstract class Customer
+namespace BookStore.Customers;
+
+public abstract class Customer : ICustomer
 {
-    public int id { get; set; }
-    public string firstName { get; set; }
-    public string lastName { get; set; }
-    public string emailAddress { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string EmailAddress { get; set; }
+    public abstract List<IBook> BorrowedBooks { get; set; }
+    public CustomerType CustomerType{ get; set; }
 
-    public virtual void PrintCustomerInfo()
+    public void BorrowBook(IBook book)
     {
-        Console.WriteLine("Customer id: " + id + "\nFirst name: " + firstName + "\nLast name: " + lastName + "\nE-Mail Address: " + emailAddress);
+        BorrowedBooks.Add(book);
     }
+
+    public void ReturnBook(IBook book)
+    {
+        BorrowedBooks.Remove(book);
+    }
+
+    public abstract void ShowBorrowedBooks();
 }

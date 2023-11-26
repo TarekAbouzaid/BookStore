@@ -1,13 +1,8 @@
 ﻿namespace BookStore.Books;
 
-abstract class Factory
+public class BookFactory
 {
-    public abstract IBook Create(BookGenre genre, string title, string author, int pages, int stock);
-}
-
-class BookFactory : Factory
-{
-    public override IBook Create(BookGenre genre, string title, string author, int pages, int stock)
+    public IBook Create(BookGenre genre, string title, string author, int pages, int stock)
     {
         return genre switch
         {
