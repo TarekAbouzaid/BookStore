@@ -1,4 +1,6 @@
-﻿namespace BookStore.Books
+﻿using BookStore.Customers;
+
+namespace BookStore.Books
 {
     internal class Program
     {
@@ -26,6 +28,34 @@
             booksManager.RemoveBook(badFantasyBook);
 
             booksManager.PrintAll();
+            
+            //testing customer
+            ICustomerFactory basicCustomerFactory = new BasicCustomerFactory();
+            Customer basicCustomer = basicCustomerFactory.Create();
+            basicCustomer.id = 0;
+            basicCustomer.firstName = "Basic";
+            basicCustomer.lastName = "Customer";
+            basicCustomer.emailAddress = "basic.customer@xyz.com";
+            basicCustomer.PrintCustomerInfo();
+            
+            ICustomerFactory childCustomerFactory = new ChildCustomerFactory();
+            Customer childCustomer = childCustomerFactory.Create();
+            childCustomer.id = 1;
+            childCustomer.firstName = "Child";
+            childCustomer.lastName = "Customer";
+            childCustomer.emailAddress = "child.customer@xyz.com";
+            ((ChildCustomer)childCustomer).MaximumBooksPerMonth = 5;
+            childCustomer.PrintCustomerInfo();
+
+            ICustomerFactory premiumCustomerFactory = new PremiumCustomerFactory();
+            Customer premiumCustomer = premiumCustomerFactory.Create();
+            premiumCustomer.id = 2;
+            premiumCustomer.firstName = "Premium";
+            premiumCustomer.lastName = "Customer";
+            premiumCustomer.emailAddress = "premium.customer@xyz.com";
+            ((PremiumCustomer)premiumCustomer).freeBooksPerMonth = 10;
+            premiumCustomer.PrintCustomerInfo();
+
         }
     }
 }
